@@ -31,6 +31,8 @@ func (mc *mysqlConn) readPacket() ([]byte, error) {
 		data, err := mc.buf.readNext(4)
 		if err != nil {
 			if cerr := mc.canceled.Value(); cerr != nil {
+				fmt.Printf("BUFFER: %v", mc.buf)
+				panic(err.Error())
 				return nil, cerr
 			}
 			errLog.Print(err)
