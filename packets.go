@@ -30,9 +30,9 @@ func (mc *mysqlConn) readPacket() ([]byte, error) {
 		// read packet header
 		data, err := mc.buf.readNext(4)
 		if err != nil {
+			fmt.Printf("BUFFER: %v", mc.buf)
+			panic(err.Error())
 			if cerr := mc.canceled.Value(); cerr != nil {
-				fmt.Printf("BUFFER: %v", mc.buf)
-				panic(err.Error())
 				return nil, cerr
 			}
 			errLog.Print(err)
